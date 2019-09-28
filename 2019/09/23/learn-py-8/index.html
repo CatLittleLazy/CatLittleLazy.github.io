@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="key">
+  
+  
+    <meta name="description" content="开始一段新的旅程，在一个新的城">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    python预习笔记(八) |
+    
+    天凉好个秋</title>
+  
+    <link rel="shortcut icon" href="/blog/public/kb.ico">
+  
+  <link rel="stylesheet" href="/blog/public/css/style.css">
+  
+    <link rel="stylesheet" href="/blog/public/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/blog/public/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-learn-py-8" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python预习笔记(八)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+	
+		<div style="display:inline;float:left;margin-top:2vh">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/word.png'/>
+        <span  class="post-meta-item-text" style='color:gray'>  字数统计: </span>
+        <span class="post-count" style='color:gray'>2,124字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp;  &nbsp;
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/time.png'/>
+        <span class="post-meta-item-text" style='color:gray'>  阅读时长: </span>
+        <span class="post-count" style='color:gray'>10分</span>
+      </span>
+    </span>
+</div>
+	
+        <a href="/blog/public/2019/09/23/learn-py-8/" class="article-date">
+  <time datetime="2019-09-22T23:46:07.000Z" itemprop="datePublished">2019-09-22</time>
+</a>
+	
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody" style='margin-top:0'>
+      
+
+
+      
+
+      
+        <h3 id="面向对象高级编程"><a href="#面向对象高级编程" class="headerlink" title="面向对象高级编程"></a>面向对象高级编程</h3><ul>
+<li>多重继承、定制类、元类</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="使用slots"><a href="#使用slots" class="headerlink" title="使用slots"></a>使用<strong>slots</strong></h3><ul>
+<li><p>通过MethodType给类动态添加方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 声明一个什么都不做的Student类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明一个设置分数的方法，添加后同时为类添加了score属性</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self,score)</span>:</span></span><br><span class="line">    self.score = score</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入所需的库</span></span><br><span class="line"><span class="keyword">from</span> types <span class="keyword">import</span> MethodType</span><br><span class="line"></span><br><span class="line"><span class="comment"># 动态的为Student添加set_score方法</span></span><br><span class="line">Student.set_score = set_score</span><br><span class="line"></span><br><span class="line">s = Student()</span><br><span class="line">s.set_score(<span class="number">100</span>)</span><br><span class="line">print(s.score) <span class="comment"># 100</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以动态的为实例添加方法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_age</span><span class="params">(self,age)</span>:</span></span><br><span class="line">    self.age = age</span><br><span class="line"></span><br><span class="line"><span class="comment"># 该方法只对实例s生效</span></span><br><span class="line">s.set_age = MethodType(set_age,s)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>声明类的时候添加特殊的<strong>slots</strong>变量可以限制class实例的动态添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="comment"># 声明该类只能动态添加name、age属性或方法</span></span><br><span class="line">    __slots__ = (<span class="string">'name'</span>,<span class="string">'age'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>父类的<strong>slots</strong>对子类不起作用，子类若定义了<strong>slots</strong>(即便子类的限制为空)，则子类的限制为父类与子类之和</p>
+</li>
+</ul>
+<h3 id="使用-property-很Nice"><a href="#使用-property-很Nice" class="headerlink" title="使用@property(很Nice)"></a>使用@property(很Nice)</h3><ul>
+<li><p>未使用@property的私有成员属性写法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@property装饰器负责把一个方法变成属性调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 通过@property将score变为属性</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 通过@score.setter将setter方法变为属性赋值</span></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过@property定义只读属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">birth</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._birth</span><br><span class="line"></span><br><span class="line"><span class="meta">    @birth.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">birth</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self._birth = value</span><br><span class="line"></span><br><span class="line">    <span class="comment"># age属性未添加set方法，所以age属性为只读属性</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">2015</span> - self._birth</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="多重继承-多考虑组合而不是复杂的继承链"><a href="#多重继承-多考虑组合而不是复杂的继承链" class="headerlink" title="多重继承(多考虑组合而不是复杂的继承链)"></a>多重继承(多考虑组合而不是复杂的继承链)</h3><ul>
+<li>主线一般都是单一继承下来，比如Cat除了继承Animal</li>
+<li>如果要加入额外的功能，为Cat再加入Runnable。这样的设计成为MixIn<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal, RunnableMixIn, CarnivorousMixIn)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="定制类-类中的特殊变量slots或函数名len"><a href="#定制类-类中的特殊变量slots或函数名len" class="headerlink" title="定制类(类中的特殊变量slots或函数名len())"></a>定制类(类中的特殊变量<strong>slots</strong>或函数名<strong>len</strong>())</h3><ul>
+<li><p><strong>str</strong>()，类比java中toString()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">    	self.name  = name</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加__str__方法后打印方法调用该方法，而不再是打印出内存地址</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="string">'MyClass object (name: %s)'</span> % self.name</span><br><span class="line"></span><br><span class="line">print(MyClass(<span class="string">'Mi'</span>))</span><br><span class="line"><span class="comment"># 输出结果为:MyClass object (name: Mi)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>repr</strong>()方法用于直接打印实例时使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">    	self.name  = name</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加__str__方法后打印方法调用该方法，而不再是打印出内存地址</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="string">'MyClass object (name: %s)'</span> % self.name</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 偷懒的使__repr__方法指向__str__方法，否则直接打印出内存地址</span></span><br><span class="line">    __repr__ = __str__</span><br><span class="line">s = MyClass(<span class="string">'Mi'</span>)</span><br><span class="line">print(s)</span><br><span class="line"><span class="comment"># 输出结果为:MyClass object (name: Mi)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>iter</strong>()方法为类添加迭代功能，可以理解为实现了Iter接口使对象可遍历，同时还需要实现<strong>next</strong>()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="comment"># 定义了类的成员变量a,b且初始化为0,1</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.a,self.b = <span class="number">0</span>,<span class="number">1</span></span><br><span class="line"></span><br><span class="line">	<span class="comment"># 实现__iter__方法返回本身</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 实现__next__方法返回下一个值</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment"># 计算出下一个值</span></span><br><span class="line">		self.a,self.b = self.b,self.a + self.b</span><br><span class="line">		<span class="comment"># 退出循环的条件</span></span><br><span class="line">		<span class="keyword">if</span> self.a&gt;<span class="number">1000</span>:</span><br><span class="line">			<span class="keyword">raise</span> StopIteration()</span><br><span class="line">		<span class="keyword">return</span> self.a</span><br><span class="line"><span class="comment"># 遍历Fib()</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> Fib():</span><br><span class="line">	print(n)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>getitem</strong>()方法实现根据下标取出元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self,n)</span>:</span></span><br><span class="line">        a,b=<span class="number">1</span>,<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(n):</span><br><span class="line">            a,b = b , a+b</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">print(Fib()[<span class="number">5</span>])  <span class="comment"># 输出8，为Fib()添加下标访问</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 此时进行切片Fib()[1:3]会报错，因为__getitem__方法中未对切片对象做处理</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self,n)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> isinstance(n,int):</span><br><span class="line">        a,b = <span class="number">1</span>,<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(n):</span><br><span class="line">            a,b = b,a+b</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> isinstance(n,slice):</span><br><span class="line">        start = n.start</span><br><span class="line">        stop = n.stop</span><br><span class="line">        <span class="keyword">if</span> start <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            start = <span class="number">0</span></span><br><span class="line">        a,b = <span class="number">1</span>,<span class="number">1</span></span><br><span class="line">        L = []</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(stop):</span><br><span class="line">            <span class="keyword">if</span> x &gt;= start:</span><br><span class="line">                L.append(a)</span><br><span class="line">            a,b = b,a+b</span><br><span class="line">        <span class="keyword">return</span> L</span><br><span class="line"></span><br><span class="line"><span class="comment"># 但是此时还未对step进行处理</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>getattr</strong>方法可以用来避免获取没有属性时的报错(后面讲的有点没懂其实)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.name = <span class="string">'Michael'</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self,attr)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> attr == <span class="string">'score'</span>:</span><br><span class="line">            retrun <span class="number">99</span></span><br><span class="line">        <span class="comment"># 返回方法也可以 </span></span><br><span class="line">        <span class="keyword">if</span> attr == <span class="string">'fn'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">lambda</span>:<span class="number">25</span></span><br><span class="line">        <span class="comment"># 添加该句子后只会响应fn、score，对于age会抛出如下异常</span></span><br><span class="line">        <span class="keyword">raise</span> AttributeError(<span class="string">'has no attribute %s'</span> % attr)</span><br><span class="line">s = Student()</span><br><span class="line">print(s.name) <span class="comment"># 输出Michael</span></span><br><span class="line">print(s.score) <span class="comment"># 输出99(这里的99就是调用了getattr方法返回的值)</span></span><br><span class="line">print(s.age) <span class="comment"># 输出None(默认输出为None，若没有getattr方法则报错)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>call</strong>方法实现类实例的自身调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为类添加该方法后类的实例可以完成自身调用</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">s = Studnet(<span class="string">"Michael"</span>)</span><br><span class="line">print(s()) <span class="comment"># __call__方法默认返回None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用callable(obj)可以判断对象是否可调用</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="使用枚举类"><a href="#使用枚举类" class="headerlink" title="使用枚举类"></a>使用枚举类</h3><ul>
+<li><p>创建枚举类及枚举类的遍历</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum</span><br><span class="line">Month = Enum(<span class="string">'Month'</span>,(<span class="string">'Jan'</span>,<span class="string">'Feb'</span>,<span class="string">'Mar'</span>))</span><br><span class="line"><span class="keyword">for</span> name,member <span class="keyword">in</span> Month.__members__.items():</span><br><span class="line">    <span class="comment"># value属性时自动赋值给成员的int常量，默认从1开始</span></span><br><span class="line">    print(name,<span class="string">'=&gt;'</span>,member,<span class="string">','</span>,member.value)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果需要更精确的控制可以派生出自定义枚举类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum,unique</span><br><span class="line"><span class="comment"># 添加unique装饰器确定Weekday中没有重复元素，如果取消unique，添加Sunn=0后打印Weekday(0)取出的元素为Sunn</span></span><br><span class="line"><span class="meta">@unique</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weekday</span><span class="params">(Enum)</span>:</span></span><br><span class="line">    Sun = <span class="number">0</span></span><br><span class="line">    Mon = <span class="number">1</span></span><br><span class="line">    Tue = <span class="number">2</span></span><br><span class="line">    Wed = <span class="number">3</span></span><br><span class="line">    Thu = <span class="number">4</span></span><br><span class="line">    Fri = <span class="number">5</span></span><br><span class="line">    Sat = <span class="number">6</span></span><br><span class="line"></span><br><span class="line">day = Weekday.Mon</span><br><span class="line">print(day) <span class="comment"># 打印Week.Mon</span></span><br><span class="line">print(day.value) <span class="comment"># 打印 1</span></span><br><span class="line">print(Weekday(<span class="number">5</span>)) <span class="comment"># 打印Week.Fri</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用枚举元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum,unique</span><br><span class="line"><span class="meta">@unique</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Gender</span><span class="params">(Enum)</span>:</span></span><br><span class="line">    Male = <span class="number">0</span></span><br><span class="line">    Female = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,gender)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> gender <span class="keyword">in</span> Gender:</span><br><span class="line">            self.gender = gender</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">"Invalid gender"</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="使用元类"><a href="#使用元类" class="headerlink" title="使用元类"></a>使用元类</h3><ul>
+<li><p>定义一个hello.py的class</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(self,name=<span class="string">'word'</span>)</span>:</span></span><br><span class="line">        print(<span class="string">'Hello, %s.'</span> % name)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用from hello import Hello导入模块时，Python解释器会一次执行该模块的所有语句，执行结果就是动态创建出一个Hello的class对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实际就是执行了模块的所有语句，且动态创建出一个Hello的class对象</span></span><br><span class="line"><span class="keyword">from</span> hello improt Hello</span><br><span class="line">h = Hello()</span><br><span class="line">h.hello() <span class="comment"># 打印 Hello, word.</span></span><br><span class="line">print(type(Hello)) <span class="comment"># &lt;class 'type'&gt;</span></span><br><span class="line">print(type(h)) <span class="comment"># &lt;class 'hello.Hello'&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>type()函数可以查看类型，class的类型是type，class的定义是动态创建的，我们可以使用type()方法动态创建出Hellon类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先定义出方法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">(self,name = <span class="string">'world'</span>)</span>:</span></span><br><span class="line">    print(<span class="string">'Hello, %s.'</span> % name)</span><br><span class="line"><span class="comment"># 动态创建出Hello类，第一个参数为类名，第二个参数为父类，注意单元素tuple写法，第三个参数为函数名</span></span><br><span class="line">Hello = type(<span class="string">'Hello'</span>,(object,),dict(hello=fn))</span><br><span class="line">h = Hello()</span><br><span class="line">h.hello()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态创建于直接手写class是没有去别的，Python解释器在遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建class</p>
+</li>
+<li><p>metaclass(元类)可以用于控制类的创建行为，先创建metaclass，就可以创建类，然后创建实例，可以理解为类是metaclass的实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用metaclass为List添加add方法</span></span><br><span class="line"><span class="comment"># 首先定义一个metaclass，其实也就是起到了一个重置创建了类的构造函数(自己的肤浅理解)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListMetaclass</span><span class="params">(type)</span>:</span></span><br><span class="line">    <span class="comment"># cls 当前准备创建的类的对象</span></span><br><span class="line">    <span class="comment"># name 类的名字</span></span><br><span class="line">    <span class="comment"># bases 当前类的父类</span></span><br><span class="line">    <span class="comment"># attrs 类的方法集合</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls,name,bases,attrs)</span>:</span></span><br><span class="line">        attrs[<span class="string">'add'</span>] = <span class="keyword">lambda</span> self,value: self.append(value)</span><br><span class="line">        <span class="keyword">return</span> type.__new__(cls,name,bases,attrs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Python解释器读到metaclass=ListMetaclass时会从该类中的__new__()方法创建类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyList</span><span class="params">(list,metaclass=ListMetaclass)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">L = MyList()</span><br><span class="line">L.add(<span class="string">'1'</span>) <span class="comment"># 由于使用了metaclass为类添加了add方法，所以可以调用add方法直接添加元素</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ORM(Object Relational Mapping)对象—关系映射，在编写该框架时，由于所有的类都只能动态定义，因为只有使用者才能根据表的结构定义出对应的类，所以需要大量使用metaclass</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://youmehe.wang:443/blog/2019/09/23/learn-py-8/" data-id="ck13d00kt000c9endrd8t2q76"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/blog/public/2019/09/24/learn-py-9/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            python预习笔记(九)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/public/2019/09/19/learn-py-7/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">python预习笔记(七)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+  <script>
+  for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+  }
+  </script>
+</article>
+
+
+
+</section>
+  <footer class="footer" style='text-align:center;'>
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 天凉好个秋</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/24/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "当前时间线 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/blog/public/"><img src="/blog/public/images/myhomeR.svg" alt="天凉好个秋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/gallery">生活</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/blog/public/js/jquery-2.0.3.min.js"></script>
+<script src="/blog/public/js/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/public/js/lazyload.min.js"></script>
+<script src="/blog/public/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/blog/public/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/blog/public/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+
+  <script src="/blog/public/js/search.js"></script>
+  <script>searchFunc('/blog/public/search.xml','local-search-input','local-search-result')</script>
+  <script>for(var i = 0;i < document.getElementsByClassName("article-footer").length;i++){document.getElementsByClassName("article-footer")[i].style.display="none";}</script>
+
+
+<script>
+for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+}
+</script>
+<script src="/blog/public/js/ocean.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="key">
+  
+  
+    <meta name="description" content="开始一段新的旅程，在一个新的城">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    python预习笔记(四) |
+    
+    天凉好个秋</title>
+  
+    <link rel="shortcut icon" href="/blog/public/kb.ico">
+  
+  <link rel="stylesheet" href="/blog/public/css/style.css">
+  
+    <link rel="stylesheet" href="/blog/public/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/blog/public/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-learn-py-4" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python预习笔记(四)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+	
+		<div style="display:inline;float:left;margin-top:2vh">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/word.png'/>
+        <span  class="post-meta-item-text" style='color:gray'>  字数统计: </span>
+        <span class="post-count" style='color:gray'>796字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp;  &nbsp;
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/time.png'/>
+        <span class="post-meta-item-text" style='color:gray'>  阅读时长: </span>
+        <span class="post-count" style='color:gray'>4分</span>
+      </span>
+    </span>
+</div>
+	
+        <a href="/blog/public/2019/09/10/learn-py-4/" class="article-date">
+  <time datetime="2019-09-09T22:59:13.000Z" itemprop="datePublished">2019-09-09</time>
+</a>
+	
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody" style='margin-top:0'>
+      
+
+
+      
+
+      
+        <h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><ul>
+<li>Higher-order function，一个函数就可以接收另一个函数作为参数</li>
+<li>以abs函数为例<img src="/blog/public/2019/09/10/learn-py-4/higher_function.png">
+
+</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="map-与reduce"><a href="#map-与reduce" class="headerlink" title="map()与reduce()"></a>map()与reduce()</h3><ul>
+<li><p>map()</p>
+<ul>
+<li>map(fx,obj)，第一个fx即为函数名，第二个obj需要是实现了Iterable的对象，调用map方法后会将传入的obj对象使用fx函数加工后返回一个Iterator对象</li>
+<li>map(str,obj)可以将obj转换为str类型</li>
+</ul>
+</li>
+<li><p>reduce()</p>
+<ul>
+<li>reduce(fx,obj)，参数与map类似，第一个函数必须接收两个参数，调用reduce方法后的过程可以类比递归，不断地将fx函数的值与下一个obj元素进行运算</li>
+<li>以求和为例<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入reduce</span></span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"><span class="comment"># 定义相加</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"><span class="comment"># 使用reduce对[1,3,5,7,9]进行求和</span></span><br><span class="line">print(reduce(add,[x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">2</span>!=<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>reduce与map共用完成字符串转int</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 纯数字字符串转换为int类型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str2int</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="comment"># 得出xy，eg:fh(1,2)，返回12</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fh</span><span class="params">(x,y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x * <span class="number">10</span> + y</span><br><span class="line">    <span class="comment"># 将0-9的字符转为对应整形</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">char2num</span><span class="params">(s)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> DIGETS[s]</span><br><span class="line">    <span class="comment"># 通过map将传入数字字符串转变为list((int)s)，如['1','3','5']转为[1,3,5]，再利用reduce求出结果135</span></span><br><span class="line">    <span class="keyword">return</span> reduce(fh,map(char2num,s))</span><br><span class="line"></span><br><span class="line">print(str2int(<span class="string">'123456'</span>))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h3><ul>
+<li><p>该函数用于过滤数列</p>
+</li>
+<li><p>filter(fx,obj)，参数与map相同，不过在调用时根据返回值为True或False来决定是否保留该值</p>
+</li>
+<li><p>如删除list中的奇数</p>
+<img src="/blog/public/2019/09/10/learn-py-4/filter.png"></li>
+<li><p>filter函数返回的是一个Iterator，即惰性序列，也就是迭代器</p>
+</li>
+<li><p>使用filter求素数(埃氏筛法)(<font color="#ff0000">不是很懂筛选函数部分，需要再理解</font>)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_odd_iter</span><span class="params">()</span>:</span></span><br><span class="line">    n = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        n = n + <span class="number">2</span></span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_not_divisible</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> x: x % n &gt; <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">primes</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    it = _odd_iter()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        n = next(it)</span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line">        it = filter(_not_divisible(n),it)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> primes():</span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">14</span>:</span><br><span class="line">        print(n)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用filter得出回文数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试逆序切片</span></span><br><span class="line">print(<span class="string">'12345'</span>[<span class="number">-1</span>:<span class="number">-3</span>:<span class="number">-1</span>])</span><br><span class="line"><span class="comment"># 筛选器</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_palindrome</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="comment"># 整除算出中位</span></span><br><span class="line">    middle = len(s) // <span class="number">2</span></span><br><span class="line">    <span class="comment"># 对中位进行切片及逆序切片判断是否相等</span></span><br><span class="line">    <span class="keyword">return</span> s[:middle]==s[<span class="number">-1</span>:-(middle+<span class="number">1</span>):<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># 使用str将数字转为字符串好方便完成切片</span></span><br><span class="line">output = filter(is_palindrome,[str(x) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">1000</span>)])</span><br><span class="line"><span class="comment"># 由于filter返回的是迭代器使用list得出所有结果</span></span><br><span class="line">print(list(output))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<img src="/blog/public/2019/09/10/learn-py-4/is_palindrome.png">
+
+<h3 id="sorted"><a href="#sorted" class="headerlink" title="sorted()"></a>sorted()</h3><ul>
+<li>sorted(obj)传入对象为list或tuple时会对其中元素进行排序，需要主要的是此时传入元素类型需要一致</li>
+<li>sorted(obj,key=*fx)可以接收一个key函数实现自定义的排序，可以类比Java中的比较器<img src="/blog/public/2019/09/10/learn-py-4/sort_two.png"></li>
+<li>sorted()排序的关键在于实现一个映射函数</li>
+<li>使用sorted()进行排序<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 已有数据</span></span><br><span class="line">L = [(<span class="string">'Bob'</span>, <span class="number">75</span>), (<span class="string">'Adam'</span>, <span class="number">92</span>), (<span class="string">'Bart'</span>, <span class="number">66</span>), (<span class="string">'Lisa'</span>, <span class="number">88</span>)]</span><br><span class="line"><span class="comment"># 按照名字排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">by_name</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> n[<span class="number">0</span>]</span><br><span class="line">print(<span class="string">'按照名字排序:'</span>,sorted(L,key=by_name))</span><br><span class="line"><span class="comment"># 按照分数排序</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">by_score</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> s[<span class="number">1</span>]</span><br><span class="line">print(<span class="string">'按照分数排序:'</span>,sorted(L,key=by_score))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<img src="/blog/public/2019/09/10/learn-py-4/sort_use.png">
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400" target="_blank" rel="noopener">廖雪峰python3教程</a><br><a href="https://www.jianshu.com/p/83551d74d5fa" target="_blank" rel="noopener">斐波那契数列尾递归</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://youmehe.wang:443/blog/2019/09/10/learn-py-4/" data-id="ck13d00km00089endp7da0wo5"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/blog/public/2019/09/12/hundredSurnName/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            Python抓取百度百家姓数据
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/public/2019/09/03/learn-py-3/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">python预习笔记(三)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+  <script>
+  for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+  }
+  </script>
+</article>
+
+
+
+</section>
+  <footer class="footer" style='text-align:center;'>
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 天凉好个秋</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/24/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "当前时间线 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/blog/public/"><img src="/blog/public/images/myhomeR.svg" alt="天凉好个秋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/gallery">生活</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/blog/public/js/jquery-2.0.3.min.js"></script>
+<script src="/blog/public/js/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/public/js/lazyload.min.js"></script>
+<script src="/blog/public/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/blog/public/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/blog/public/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+
+  <script src="/blog/public/js/search.js"></script>
+  <script>searchFunc('/blog/public/search.xml','local-search-input','local-search-result')</script>
+  <script>for(var i = 0;i < document.getElementsByClassName("article-footer").length;i++){document.getElementsByClassName("article-footer")[i].style.display="none";}</script>
+
+
+<script>
+for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+}
+</script>
+<script src="/blog/public/js/ocean.js"></script>
+
+</body>
+</html>

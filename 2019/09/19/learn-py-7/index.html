@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="key">
+  
+  
+    <meta name="description" content="开始一段新的旅程，在一个新的城">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    python预习笔记(七) |
+    
+    天凉好个秋</title>
+  
+    <link rel="shortcut icon" href="/blog/public/kb.ico">
+  
+  <link rel="stylesheet" href="/blog/public/css/style.css">
+  
+    <link rel="stylesheet" href="/blog/public/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/blog/public/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-learn-py-7" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python预习笔记(七)
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+	
+		<div style="display:inline;float:left;margin-top:2vh">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/word.png'/>
+        <span  class="post-meta-item-text" style='color:gray'>  字数统计: </span>
+        <span class="post-count" style='color:gray'>1,556字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp;  &nbsp;
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/time.png'/>
+        <span class="post-meta-item-text" style='color:gray'>  阅读时长: </span>
+        <span class="post-count" style='color:gray'>7分</span>
+      </span>
+    </span>
+</div>
+	
+        <a href="/blog/public/2019/09/19/learn-py-7/" class="article-date">
+  <time datetime="2019-09-19T10:14:32.000Z" itemprop="datePublished">2019-09-19</time>
+</a>
+	
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody" style='margin-top:0'>
+      
+
+
+      
+
+      
+        <h3 id="面向对象编程-Object-Oriented-Programming"><a href="#面向对象编程-Object-Oriented-Programming" class="headerlink" title="面向对象编程(Object Oriented Programming)"></a>面向对象编程(Object Oriented Programming)</h3><ul>
+<li>以展示学生成绩为例，面向过程写法为<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std1 = &#123;<span class="string">'name'</span>:<span class="string">'Michael'</span>,<span class="string">'score'</span>:<span class="number">97</span>&#125;</span><br><span class="line">std2 = &#123;<span class="string">'name'</span>:<span class="string">'Bob'</span>,<span class="string">'score'</span>:<span class="number">81</span>&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li>面向对象写法为<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,score)</span>:</span></span><br><span class="line">		self.name = name;</span><br><span class="line">		self.score = score</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">print_score</span><span class="params">(self)</span>:</span></span><br><span class="line">		print(<span class="string">'%s: %s'</span> % (self.name,self.score))</span><br><span class="line"></span><br><span class="line">bart = Student(<span class="string">'Bart'</span>,<span class="number">59</span>)</span><br><span class="line">lisa = Student(<span class="string">'Lisa'</span>,<span class="number">87</span>)</span><br><span class="line">bart.print_score()</span><br><span class="line">lisa.print_score()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="类-Class-与实例-Instance"><a href="#类-Class-与实例-Instance" class="headerlink" title="类(Class)与实例(Instance)"></a>类(Class)与实例(Instance)</h3><ul>
+<li><p>创建类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#关键字 类名    父类(没有父类可以写object)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span>  <span class="title">Student</span> <span class="params">(object)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 声明一个Student的实例对象bart</span></span><br><span class="line">bart = Student()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 类中的__init__方法为构造函数，且第一个参数永远是self，方法内部可以将各个属性绑定至self，也就是创建的实例本身</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,score)</span>:</span></span><br><span class="line">		self.name = name;</span><br><span class="line">		self.score = score</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义类中的函数与普通函数不同之处在于第一个参数永远是实力变量self，且调用时不需要传入该参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_score</span><span class="params">(self)</span>:</span></span><br><span class="line">	print(<span class="string">'%s: %s'</span> % (self.name,self.score))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数据封装指讲类的成员变量封装入类方法中实现其逻辑而不对外暴露，如print_scroe()方法只是直接打印出了成员变量name,scroe，同时还可以利用封装添加新的方法，如get_grade</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_grade</span><span class="params">(self)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> self.score &gt;= <span class="number">90</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">'A'</span></span><br><span class="line">	<span class="keyword">elif</span> self.score &gt;= <span class="number">60</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">'B'</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="string">'C'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类是创建实例的模板，实例则是一个个具体的对象</p>
+</li>
+<li><p>与静态语言不通，python允许对实例变量绑定任何数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user = Student()</span><br><span class="line">user.age = <span class="number">8</span> <span class="comment">#静态语言会直接报错</span></span><br><span class="line">print(user.age) <span class="comment">#打印结果为8</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="访问限制"><a href="#访问限制" class="headerlink" title="访问限制"></a>访问限制</h3><ul>
+<li><p>在Student中的成员变量未声明为私有变量，所以外部代码可以直接进行修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">'Bart'</span>,<span class="number">59</span>)</span><br><span class="line">bart.score = <span class="number">99</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在成员变量前添加两个下划线即可声明为私有成员变量(pirvate)，此时在外部代码对私有成员变量进行修改无效</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,score)</span>:</span></span><br><span class="line">	self.__name = name</span><br><span class="line">	self.__score = score</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对私有成员变量的修改可以提供set、get方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_name</span><span class="params">(self)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> self.__name</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_name</span><span class="params">(self,name)</span>:</span></span><br><span class="line">	self.__name = name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Python中变量名类似<strong>xxx</strong>为特殊变量，可以直接方位，并非私有变量</p>
+</li>
+<li><p>在Python中单独_开头的是约定俗成的私有变量，也即是可以访问到，但是请视为私有的，不要随意访问</p>
+</li>
+<li><p>私有成员变量也是可以访问，解释器将私有变量更名为_类名__变量名</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bart = Student(<span class="string">'Bart'</span>,<span class="number">98</span>)</span><br><span class="line">print(bart._Student__score) <span class="comment">#访问到98</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="继承与多态"><a href="#继承与多态" class="headerlink" title="继承与多态"></a>继承与多态</h3><ul>
+<li><p>定义一个类时，可以从现有的类中继承，如Student继承自object，新的类(Student)成为子类(Subclass)，被继承的类称为基类或父类、超类(Base class or Super class)</p>
+</li>
+<li><p>子类继承父类后会拥有父类的全部功能，如新增一个Representative课代表类，Representative类会直接拥有Student类中的功能</p>
+</li>
+<li><p>子类可以重写父类中已有的方法，通过重写实现多态，也就是根据调用方法的对象确定具体使用父类方法还是子类方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 课代表类继承自学生类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Representative</span><span class="params">(Student)</span>:</span></span><br><span class="line">	<span class="comment"># 课代表类的构造方法，在学生类初上添加学科字段</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,score,gender,subj)</span>:</span></span><br><span class="line">		<span class="comment"># 调用父类Student学生类的构造方法</span></span><br><span class="line">		super().__init__(name,score,gender)</span><br><span class="line">		<span class="comment"># 对新怎字段命名</span></span><br><span class="line">		self.__subj = subj</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 重写打印成绩类</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">print_score</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment"># 调用父类学生类打印成绩</span></span><br><span class="line">		super().print_score()</span><br><span class="line">		<span class="comment"># 返回课代表学科</span></span><br><span class="line">		<span class="keyword">return</span> self.__subj</span><br><span class="line">		</span><br><span class="line"><span class="comment"># 创建数学课代表实例</span></span><br><span class="line">mathRep = Representative(<span class="string">'rr'</span>,<span class="number">99</span>,<span class="string">'female'</span>,<span class="string">'math'</span>)</span><br><span class="line"><span class="comment"># 调用重写的方法打印成绩</span></span><br><span class="line">print(mathRep.print_score())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个打印成绩的方法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_user_score</span><span class="params">(student)</span>:</span></span><br><span class="line">	print(student.print_score())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开闭原则</span></span><br><span class="line"><span class="comment"># 对象为Student</span></span><br><span class="line">print_user_score(lisa)</span><br><span class="line"><span class="comment"># 对象为Representative</span></span><br><span class="line">print_user_score(mathRep)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开闭原则(对于print_user_score方法而言)</p>
+<ul>
+<li>对扩展开放：允许新增Student子类Representative课代类作为参数</li>
+<li>对修改封闭：不需要修改依赖Student类型的print_user_score方法</li>
+</ul>
+</li>
+<li><p>类可以一级一级的下继承下来，如Student继承自object，Representative继承自Student</p>
+</li>
+<li><p>若是Java，需要保证print_user_score()方法接收的是一个Student或其子类，对于Python而言则只需要保证出入实例具有print_score()方法即可</p>
+</li>
+</ul>
+<h3 id="获取对象信息"><a href="#获取对象信息" class="headerlink" title="获取对象信息"></a>获取对象信息</h3><ul>
+<li><p>使用type(obj)获取obj的类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type(<span class="number">123</span>) <span class="comment"># &lt;class 'int'&gt;</span></span><br><span class="line">type(lisa) <span class="comment"># # &lt;class '__main__.Student'&gt;</span></span><br><span class="line">type(mathRep) <span class="comment"># &lt;class '__main__.Representative'&gt;</span></span><br><span class="line">type(abs) <span class="comment"># &lt;class 'builtin_function_or_method'&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用tpye(obj)做类型判断</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type(<span class="number">123</span>) == int <span class="comment"># True</span></span><br><span class="line">type(lisa) == Student <span class="comment"># True</span></span><br><span class="line">type(mathRep) == Student <span class="comment"># False，这里没有判断出继承关系</span></span><br><span class="line">type(lisa) == Representative <span class="comment"># False </span></span><br><span class="line">type(abs) == types.BuiltinFunctionType <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用isinstance()判断类的类型更为方便</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">isinstance(lisa,Student) <span class="comment"># True</span></span><br><span class="line">isinstance(mathRep,Student) <span class="comment"># True，判断出继承关系</span></span><br><span class="line">isinstance(lisa,Representative) <span class="comment"># False 无法自动上转型</span></span><br><span class="line"><span class="comment"># 判断是否属于某种类型</span></span><br><span class="line">isinstance([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],(list,tuple))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用dir(obj)获取实例信息(类比反射)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印出lisa实例的所有方法及变量</span></span><br><span class="line">dir(lisa)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<img src="/blog/public/2019/09/19/learn-py-7/dir_instance.png">
+
+<ul>
+<li>使用getattr()、setattr()、hasattr()可以操作对象的状态<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印出lisa实例的所有方法及变量</span></span><br><span class="line">hasattr(lisa,<span class="string">'x'</span>) <span class="comment"># False</span></span><br><span class="line">hasattr(lisa,<span class="string">'__name'</span>) <span class="comment"># True</span></span><br><span class="line">getattr(lisa,<span class="string">'x'</span>,<span class="number">10</span>) <span class="comment"># 有x成员变量时返回对应的值，没有事返回10</span></span><br><span class="line">fn =  getattr(lisa,<span class="string">'get_gender'</span>) <span class="comment"># 获取方法变量， </span></span><br><span class="line">fn() <span class="comment"># 执行get_gender()方法</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="实例属性与类属性-即成员变量与类变量"><a href="#实例属性与类属性-即成员变量与类变量" class="headerlink" title="实例属性与类属性(即成员变量与类变量)"></a>实例属性与类属性(即成员变量与类变量)</h3><ul>
+<li><p>定义类属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="comment"># 这里的name为类属性，可以理解为static修饰的类变量，所有实例都能访问到</span></span><br><span class="line">	name = <span class="string">'Student'</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">		<span class="comment"># 这里的name为实例属性</span></span><br><span class="line">		self.name = name</span><br><span class="line"></span><br><span class="line">lisa = Student(<span class="string">'lisa'</span>)</span><br><span class="line">print(lisa.name) <span class="comment"># 打印出lisa</span></span><br><span class="line">print(Student.name) <span class="comment"># 打印出Student</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类属性与实例属性相同时，实例属性优先级高，且会屏蔽掉类属性</p>
+</li>
+<li><p>可以使用类属性做计数器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">	count = <span class="number">0</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,score,gender)</span>:</span></span><br><span class="line">		self.__name = name;</span><br><span class="line">		self.__score = score</span><br><span class="line">		self.set_gender(gender)</span><br><span class="line">		Student.count = Student.count + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类属性同样会被继承类拥有</p>
+</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017495723838528" target="_blank" rel="noopener">廖雪峰Python3教程</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://youmehe.wang:443/blog/2019/09/19/learn-py-7/" data-id="ck13d00ks000b9end55c0d20v"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/blog/public/2019/09/23/learn-py-8/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            python预习笔记(八)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/public/2019/09/19/OceanAddWordCount/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">Ocean主题添加字数统计及阅读时长估计</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+  <script>
+  for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+  }
+  </script>
+</article>
+
+
+
+</section>
+  <footer class="footer" style='text-align:center;'>
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 天凉好个秋</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/24/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "当前时间线 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/blog/public/"><img src="/blog/public/images/myhomeR.svg" alt="天凉好个秋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/gallery">生活</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/blog/public/js/jquery-2.0.3.min.js"></script>
+<script src="/blog/public/js/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/public/js/lazyload.min.js"></script>
+<script src="/blog/public/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/blog/public/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/blog/public/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+
+  <script src="/blog/public/js/search.js"></script>
+  <script>searchFunc('/blog/public/search.xml','local-search-input','local-search-result')</script>
+  <script>for(var i = 0;i < document.getElementsByClassName("article-footer").length;i++){document.getElementsByClassName("article-footer")[i].style.display="none";}</script>
+
+
+<script>
+for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+}
+</script>
+<script src="/blog/public/js/ocean.js"></script>
+
+</body>
+</html>
