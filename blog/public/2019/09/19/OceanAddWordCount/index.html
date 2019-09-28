@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="key">
+  
+  
+    <meta name="description" content="开始一段新的旅程，在一个新的城">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Ocean主题添加字数统计及阅读时长估计 |
+    
+    天凉好个秋</title>
+  
+    <link rel="shortcut icon" href="/blog/public/kb.ico">
+  
+  <link rel="stylesheet" href="/blog/public/css/style.css">
+  
+    <link rel="stylesheet" href="/blog/public/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/blog/public/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-OceanAddWordCount" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ocean主题添加字数统计及阅读时长估计
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+	
+		<div style="display:inline;float:left;margin-top:2vh">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/word.png'/>
+        <span  class="post-meta-item-text" style='color:gray'>  字数统计: </span>
+        <span class="post-count" style='color:gray'>404字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp;  &nbsp;
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/time.png'/>
+        <span class="post-meta-item-text" style='color:gray'>  阅读时长: </span>
+        <span class="post-count" style='color:gray'>2分</span>
+      </span>
+    </span>
+</div>
+	
+        <a href="/blog/public/2019/09/19/OceanAddWordCount/" class="article-date">
+  <time datetime="2019-09-18T22:32:44.000Z" itemprop="datePublished">2019-09-18</time>
+</a>
+	
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody" style='margin-top:0'>
+      
+
+
+      
+
+      
+        <h3 id="添加wordcount插件"><a href="#添加wordcount插件" class="headerlink" title="添加wordcount插件"></a>添加wordcount插件</h3><ul>
+<li>Node版本在7.6.0之前<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-wordcount@2 --save</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li>Node版本较高<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save hexo-wordcount</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="主题配置中开启wordcount插件"><a href="#主题配置中开启wordcount插件" class="headerlink" title="主题配置中开启wordcount插件"></a>主题配置中开启wordcount插件</h3><ul>
+<li>在Ocean的_config.yml文件追加<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#字符统计</span><br><span class="line">word_count: True</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="在网上下载想要的图标放置于ocean-source-images-文件夹"><a href="#在网上下载想要的图标放置于ocean-source-images-文件夹" class="headerlink" title="在网上下载想要的图标放置于ocean/source/images/文件夹"></a>在网上下载想要的图标放置于ocean/source/images/文件夹</h3><img src="/blog/public/2019/09/19/OceanAddWordCount/img.png">
+
+<h3 id="新建一个word-ejs文件-图片使用的就是上面下载的图片"><a href="#新建一个word-ejs文件-图片使用的就是上面下载的图片" class="headerlink" title="新建一个word.ejs文件(图片使用的就是上面下载的图片)"></a>新建一个word.ejs文件(图片使用的就是上面下载的图片)</h3><figure class="highlight plain"><figcaption><span>置于blog/themes/ocean/layout/_partial/post/目录下</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;display:inline;float:left;margin-top:2vh&quot;&gt;</span><br><span class="line">    &lt;span class=&quot;post-time&quot;&gt;</span><br><span class="line">      &lt;span class=&quot;post-meta-item-icon&quot;&gt;</span><br><span class="line">        &lt;image class=&quot;fa fa-keyboard-o&quot; src=&apos;/blog/public/images/word.png&apos;/&gt;</span><br><span class="line">        &lt;span  class=&quot;post-meta-item-text&quot;&gt;  字数统计: &lt;/span&gt;</span><br><span class="line">        &lt;span class=&quot;post-count&quot; style=&apos;color:gray&apos;&gt;&lt;%= wordcount(post.content) %&gt;字&lt;/span&gt;</span><br><span class="line">      &lt;/span&gt;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;post-time&quot;&gt;</span><br><span class="line">      &amp;nbsp;  &amp;nbsp;</span><br><span class="line">      &lt;span class=&quot;post-meta-item-icon&quot;&gt;</span><br><span class="line">        &lt;image class=&quot;fa fa-keyboard-o&quot; src=&apos;/blog/public/images/time.png&apos;/&gt;</span><br><span class="line">        &lt;span class=&quot;post-meta-item-text&quot;&gt;  阅读时长: &lt;/span&gt;</span><br><span class="line">        &lt;span class=&quot;post-count&quot; style=&apos;color:gray&apos;&gt;&lt;%= min2read(post.content) %&gt;分&lt;/span&gt;</span><br><span class="line">      &lt;/span&gt;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改article-ejs-用于文章显示"><a href="#修改article-ejs-用于文章显示" class="headerlink" title="修改article.ejs(用于文章显示)"></a>修改article.ejs(用于文章显示)</h3><ul>
+<li><p>添加统计元素</p>
+<figure class="highlight plain"><figcaption><span>ocean/layout/_partial/目录下</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (index || is_post()) &#123; %&gt;</span><br><span class="line">  &lt;div class=&quot;article-meta&quot;&gt;</span><br><span class="line">&lt;% if(theme.word_count) &#123; %&gt;</span><br><span class="line">    &lt;%- partial(&apos;post/word&apos;) %&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br><span class="line">    &lt;%- partial(&apos;post/date&apos;, &#123;class_name: &apos;article-date&apos;, date_format: null&#125;) %&gt;</span><br><span class="line">&lt;%- partial(&apos;post/category&apos;) %&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改显示位置</p>
+<figure class="highlight plain"><figcaption><span>ocean/layout/_partial/尾部</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">for(var i = 0;i &lt; document.getElementsByClassName(&quot;article-date&quot;).length;i++)&#123;</span><br><span class="line">  document.getElementsByClassName(&quot;article-date&quot;)[i].style.float=&quot;right&quot;;</span><br><span class="line">  document.getElementsByClassName(&quot;article-date&quot;)[i].style.marginTop=&quot;2vh&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="修改after-footer-ejs-用于首页显示"><a href="#修改after-footer-ejs-用于首页显示" class="headerlink" title="修改after-footer.ejs(用于首页显示)"></a>修改after-footer.ejs(用于首页显示)</h3><figure class="highlight plain"><figcaption><span>ocean/layout/_partial/尾部</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">for(var i = 0;i &lt; document.getElementsByClassName(&quot;article-date&quot;).length;i++)&#123;</span><br><span class="line">  document.getElementsByClassName(&quot;article-date&quot;)[i].style.float=&quot;right&quot;;</span><br><span class="line">  document.getElementsByClassName(&quot;article-date&quot;)[i].style.marginTop=&quot;2vh&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="最终效果如下"><a href="#最终效果如下" class="headerlink" title="最终效果如下"></a>最终效果如下</h3><ul>
+<li>首页<img src="/blog/public/2019/09/19/OceanAddWordCount/list.png"></li>
+<li>详情页<img src="/blog/public/2019/09/19/OceanAddWordCount/detail.png">
+
+
+</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://www.jianshu.com/p/baea8c95e39b" target="_blank" rel="noopener">安装wordcount</a><br><a href="https://www.imooc.com/article/44662?block_id=tuijian_wz" target="_blank" rel="noopener">主题美化</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://youmehe.wang:443/blog/2019/09/19/OceanAddWordCount/" data-id="ck102vwtd000264nd8q228qjz"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/blog/public/2019/09/19/learn-py-7/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            python预习笔记(七)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/public/2019/09/18/learn-py-6/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">python预习笔记(六)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+  <script>
+  for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+  }
+  </script>
+</article>
+
+
+
+</section>
+  <footer class="footer" style='text-align:center;'>
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 天凉好个秋</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/24/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "当前时间线 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/blog/public/"><img src="/blog/public/images/myhomeR.svg" alt="天凉好个秋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/gallery">生活</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/blog/public/js/jquery-2.0.3.min.js"></script>
+<script src="/blog/public/js/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/public/js/lazyload.min.js"></script>
+<script src="/blog/public/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/blog/public/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/blog/public/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+
+  <script src="/blog/public/js/search.js"></script>
+  <script>searchFunc('/blog/public/search.xml','local-search-input','local-search-result')</script>
+  <script>for(var i = 0;i < document.getElementsByClassName("article-footer").length;i++){document.getElementsByClassName("article-footer")[i].style.display="none";}</script>
+
+
+<script>
+for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+}
+</script>
+<script src="/blog/public/js/ocean.js"></script>
+
+</body>
+</html>
