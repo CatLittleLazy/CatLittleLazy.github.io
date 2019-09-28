@@ -71,13 +71,13 @@
     <content type="text"><![CDATA[已有资源 一个完成基本web服务器搭建的Linux服务器 域名一个 Putty.exe WinScp.exe 建站部分123456789101112131415161718192021222324252627//安装nodesudo apt-get install -y nodejs//安装hexo npm install -g hexo-cli//创建博客文件夹且初始化 hexo init blog //修改_config.xml中部分【url:域名/blog】、【root:/blog/public/】部分vi _config.xml//下载Ocean主题git clone https://github.com/zhwangart/hexo-theme-ocean.git themes/ocean//安装搜索库npm install hexo-generator-searchdb --save//根目录下配置文件_config.xml添加如下部分search: path: search.xml field: post content: true //主题目录下的_config.xml添加如下部分local_search: enable: true #搜索开关 Ocean主题遇到的问题搜索无效问题12345//在themes/ocean/layout/_partial/after-footer.ejs中添加如下代码(位置靠后)&lt;% if (theme.local_search.enable)&#123; %&gt; &lt;%- js('/js/search') %&gt; &lt;script&gt;searchFunc('/blog/public/search.xml','local-search-input','local-search-result')&lt;/script&gt;&lt;% &#125; %&gt; 分享按钮取消123456//在themes/ocean/layout/_partial/after-footer.ejs中添加如下代码&lt;script&gt;for(var i = 0;i &lt; document.getElementsByClassName("article-footer").length;i++)&#123; document.getElementsByClassName("article-footer")[i].style.display="none";&#125;&lt;/script&gt; 时间显示在右侧123456//在themes/ocean/layout/_partial/after-footer.ejs及article.ejs中添加如下代码&lt;script&gt;for(var i = 0;i &lt; document.getElementsByClassName("article-meta").length;i++)&#123; document.getElementsByClassName("article-meta")[i].style.float="right";&#125;&lt;/script&gt; 更改顶部视频1234//在themes/ocean/layout/_partial/ocean.ejs中修改路径即可poster="&lt;%- theme.ocean.path %&gt;phone.png"&lt;source src="&lt;%- theme.ocean.path %&gt;phone.mp4" type="video/mp4"&gt;//将视频及封面放在themes/ocean/source/images/ocean/中即可 参考内容 Hexo中文文档 Ocean主题]]></content>
   </entry>
   <entry>
-    <title><![CDATA[关于]]></title>
-    <url>%2Fblog%2Fpublic%2Fabout%2Findex.html</url>
-    <content type="text"><![CDATA[废都Android马扎一枚 | lovesonycd@gmail.com 书籍 在读 《百年孤独》《人间草木》 已读 《活着》(2019.09.09)《局外人》(2019.08)《浮生六记》(2019.08)《牧羊少年奇幻之旅》(2019.07) 电影 已看 《友情以上》(2019.09.21 10:30)《超脱》(2019.09.11)《罗小黑战记》(2019.09.07)《燃烧》(2019.09)《浪潮》(2019.09)《死亡诗社》(2019.08)《寄生虫》(2019.08)《哪吒之魔童降世》(2019)《看不见的客人》(2019)《扫毒2》(2019)《千与千寻》(2019)《绝杀慕尼黑》(2019)《X战警：黑凤凰》(2019)《追龙2》(2019)《飞驰人生》(2019.02.05)《疯狂外星人》(2019.02.05)《流浪地球》(2019.02.05)《新喜剧之王》(2019.02.05)《龙猫》(2018.12.14)《无敌破坏王2》(2018.11.24)《无名之辈》(2018.11.18)《邪不压正》(2018.07.12)《我不是药神》(2018.07.06)《侏罗纪公园2》(2018.06.08)《幕后玩家》(2018.04.28)《爆裂无声》(2018.04.03)《芳华》(2017.12.23)《声之形》(2017.09.08) 想看 《血战钢锯岭》]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[gallery]]></title>
     <url>%2Fblog%2Fpublic%2Fgallery%2Findex.html</url>
     <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[关于]]></title>
+    <url>%2Fblog%2Fpublic%2Fabout%2Findex.html</url>
+    <content type="text"><![CDATA[废都Android马扎一枚 | lovesonycd@gmail.com 书籍 在读 《百年孤独》《人间草木》 已读 《活着》(2019.09.09)《局外人》(2019.08)《浮生六记》(2019.08)《牧羊少年奇幻之旅》(2019.07) 电影 已看 《友情以上》(2019.09.21 10:30)《超脱》(2019.09.11)《罗小黑战记》(2019.09.07)《燃烧》(2019.09)《浪潮》(2019.09)《死亡诗社》(2019.08)《寄生虫》(2019.08)《哪吒之魔童降世》(2019)《看不见的客人》(2019)《扫毒2》(2019)《千与千寻》(2019)《绝杀慕尼黑》(2019)《X战警：黑凤凰》(2019)《追龙2》(2019)《飞驰人生》(2019.02.05)《疯狂外星人》(2019.02.05)《流浪地球》(2019.02.05)《新喜剧之王》(2019.02.05)《龙猫》(2018.12.14)《无敌破坏王2》(2018.11.24)《无名之辈》(2018.11.18)《邪不压正》(2018.07.12)《我不是药神》(2018.07.06)《侏罗纪公园2》(2018.06.08)《幕后玩家》(2018.04.28)《爆裂无声》(2018.04.03)《芳华》(2017.12.23)《声之形》(2017.09.08) 想看 《血战钢锯岭》]]></content>
   </entry>
 </search>
