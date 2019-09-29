@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="key">
+  
+  
+    <meta name="description" content="开始一段新的旅程，在一个新的城">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Python抓取百度百家姓数据 |
+    
+    天凉好个秋</title>
+  
+    <link rel="shortcut icon" href="/blog/public/kb.ico">
+  
+  <link rel="stylesheet" href="/blog/public/css/style.css">
+  
+    <link rel="stylesheet" href="/blog/public/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/blog/public/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-hundredSurnName" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python抓取百度百家姓数据
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+	
+		<div style="display:inline;float:left;margin-top:2vh">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/word.png'/>
+        <span  class="post-meta-item-text" style='color:gray'>  字数统计: </span>
+        <span class="post-count" style='color:gray'>596字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp;  &nbsp;
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/time.png'/>
+        <span class="post-meta-item-text" style='color:gray'>  阅读时长: </span>
+        <span class="post-count" style='color:gray'>3分</span>
+      </span>
+    </span>
+</div>
+	
+        <a href="/blog/public/2019/09/12/hundredSurnName/" class="article-date">
+  <time datetime="2019-09-11T23:28:11.000Z" itemprop="datePublished">2019-09-11</time>
+</a>
+	
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody" style='margin-top:0'>
+      
+
+
+      
+
+      
+        <h3 id="获取所有姓氏"><a href="#获取所有姓氏" class="headerlink" title="获取所有姓氏"></a>获取所有姓氏</h3><ul>
+<li>进入<a href="https://hanyu.baidu.com/shici/detail?pid=0b2f26d4c0ddb3ee693fdb1137ee1b0d&from=kg0" target="_blank" rel="noopener">百家姓</a>获取所有百家姓姓氏</li>
+<li>观察后得出单姓与复姓的分割位置如下：<img src="/blog/public/2019/09/12/hundredSurnName/surnname_part.png">
+
+</li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li>分别复制单姓与复姓姓氏构造list如下(利用sublime多行操作ctrl+shift+l很容易完成)：<img src="/blog/public/2019/09/12/hundredSurnName/single_surn.png">
+
+</li>
+</ul>
+<h3 id="获得姓氏爬取网址"><a href="#获得姓氏爬取网址" class="headerlink" title="获得姓氏爬取网址"></a>获得姓氏爬取网址</h3><ul>
+<li>使用百度搜索姓，以’王’为例，此时网址为:<a href="https://baike.baidu.com/item/王/504?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/王/504?fr=aladdin</a></li>
+<li>直接更改网址中的’王’为’李’后网址进入error.html</li>
+<li>重新尝试再姓氏后加上姓得到网址:<a href="https://baike.baidu.com/item/王姓" target="_blank" rel="noopener">https://baike.baidu.com/item/王姓</a></li>
+<li>更改王姓为宋姓后页面显示宋姓信息</li>
+<li>故:url=’<a href="https://baike.baidu.com/item/&#39;" target="_blank" rel="noopener">https://baike.baidu.com/item/&#39;</a> + surnName + ‘姓’</li>
+</ul>
+<h3 id="分析网页内容"><a href="#分析网页内容" class="headerlink" title="分析网页内容"></a>分析网页内容</h3><ul>
+<li><p>以王姓为例先抓取网页内容至本地:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入需要的库(python3后统一使用使用urllib.request)</span></span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="comment"># 请求网页数据</span></span><br><span class="line">page = urllib.request.urlopen(<span class="string">'https://baike.baidu.com/item/'</span> + urllib.parse.quote(<span class="string">'王姓'</span>, safe=<span class="string">'/'</span>, encoding=<span class="literal">None</span>, errors=<span class="literal">None</span>))</span><br><span class="line"><span class="comment"># 获取数据内容</span></span><br><span class="line">data = page.read()</span><br><span class="line"><span class="comment"># 写入本地文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'web_got.html'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:  <span class="comment"># 接收的数据写入文件</span></span><br><span class="line">    f.write(data)</span><br><span class="line">    f.close()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本内文件内容如下：</p>
+<img src="/blog/public/2019/09/12/hundredSurnName/surn_wang.png"></li>
+<li><p>使用正则获取如下部分:</p>
+<img src="/blog/public/2019/09/12/hundredSurnName/surn_want.png">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入正则库</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 使用正则匹配数据</span></span><br><span class="line">re_content = re.findall(<span class="string">'(?&lt;=content=").+?(?=")'</span>, data.decode(<span class="string">'utf-8'</span>))</span><br><span class="line">获取数据如下</span><br><span class="line">print(re_content)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<img src="/blog/public/2019/09/12/hundredSurnName/surn_get.png">
+
+<h3 id="最终方法代码如下"><a href="#最终方法代码如下" class="headerlink" title="最终方法代码如下"></a>最终方法代码如下</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 姓氏，保存文件名，搜索有误姓氏记录</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getInfo</span><span class="params">(surnName,fileName,needSearchFileName)</span>:</span></span><br><span class="line">    <span class="comment"># 根据姓氏请求数据</span></span><br><span class="line">    page = urllib.request.urlopen(<span class="string">'https://baike.baidu.com/item/'</span> + urllib.parse.quote(surnName+<span class="string">'姓'</span>, safe=<span class="string">'/'</span>, encoding=<span class="literal">None</span>, errors=<span class="literal">None</span>))</span><br><span class="line">    <span class="comment"># 获取请求结果</span></span><br><span class="line">    data = page.read()</span><br><span class="line">    <span class="comment"># 正则匹配出所需数据</span></span><br><span class="line">    re_content = re.findall(<span class="string">'(?&lt;=content=").+?(?=")'</span>, data.decode(<span class="string">'utf-8'</span>))</span><br><span class="line">    <span class="comment"># 无数据时记录至文件</span></span><br><span class="line">    <span class="keyword">if</span> len(re_content) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">with</span> open(needSearchFileName+<span class="string">'.txt'</span>, <span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(<span class="string">'该姓氏搜索无结果:'</span>+surnName+<span class="string">'\n'</span>)</span><br><span class="line">            f.close()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="comment"># 搜索出的结果进行拼接json数据后写入文件</span></span><br><span class="line">    <span class="keyword">elif</span> re_content[<span class="number">2</span>].find(<span class="string">'。'</span>,<span class="number">0</span>,len(re_content[<span class="number">2</span>])<span class="number">-1</span>) != <span class="number">-1</span>:</span><br><span class="line">        content = <span class="string">''</span></span><br><span class="line">        <span class="keyword">with</span> open(fileName+<span class="string">'.txt'</span>, <span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="comment"># 只提取前两句描述</span></span><br><span class="line">            <span class="keyword">if</span> len(re_content[<span class="number">2</span>].split(<span class="string">'。'</span>))&gt;<span class="number">2</span>:</span><br><span class="line">                content = re_content[<span class="number">2</span>].split(<span class="string">'。'</span>)[<span class="number">0</span>] + <span class="string">'。'</span> + re_content[<span class="number">2</span>].split(<span class="string">'。'</span>)[<span class="number">1</span>]+<span class="string">'。'</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                content = re_content[<span class="number">2</span>]</span><br><span class="line">            f.write(<span class="string">',&#123;\"surnName\"'</span>+<span class="string">':\"'</span>+surnName +<span class="string">'\",\"Summary\":\"'</span>+ content + <span class="string">'\"&#125;'</span>)</span><br><span class="line">            f.close()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="comment"># 多义姓氏需要单独搜索</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">with</span> open(needSearchFileName+<span class="string">'.txt'</span>, <span class="string">'a'</span>,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(<span class="string">'需要单独搜索的姓氏:'</span>+surnName+<span class="string">'\n'</span>)</span><br><span class="line">            f.close()</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<img src="/blog/public/2019/09/12/hundredSurnName/info.png">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://youmehe.wang:443/blog/2019/09/12/hundredSurnName/" data-id="ck14rc97j0005obnd13koj8mt"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/blog/public/2019/09/18/learn-py-5/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            python预习笔记(五)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/blog/public/2019/09/10/learn-py-4/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">python预习笔记(四)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+  <script>
+  for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+  }
+  </script>
+</article>
+
+
+
+</section>
+  <footer class="footer" style='text-align:center;'>
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 天凉好个秋</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/24/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "当前时间线 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/blog/public/"><img src="/blog/public/images/myhomeR.svg" alt="天凉好个秋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/gallery">生活</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/blog/public/js/jquery-2.0.3.min.js"></script>
+<script src="/blog/public/js/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/public/js/lazyload.min.js"></script>
+<script src="/blog/public/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/blog/public/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/blog/public/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+
+  <script src="/blog/public/js/search.js"></script>
+  <script>searchFunc('/blog/public/search.xml','local-search-input','local-search-result')</script>
+  <script>for(var i = 0;i < document.getElementsByClassName("article-footer").length;i++){document.getElementsByClassName("article-footer")[i].style.display="none";}</script>
+
+
+<script>
+for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+}
+</script>
+<script src="/blog/public/js/ocean.js"></script>
+
+</body>
+</html>
