@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="key">
+  
+  
+    <meta name="description" content="开始一段新的旅程，在一个新的城">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    关于屏幕适配 |
+    
+    天凉好个秋</title>
+  
+    <link rel="shortcut icon" href="/blog/public/kb.ico">
+  
+  <link rel="stylesheet" href="/blog/public/css/style.css">
+  
+    <link rel="stylesheet" href="/blog/public/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/blog/public/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-screen_compatible" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于屏幕适配
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+	
+		<div style="display:inline;float:left;margin-top:2vh">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/word.png'/>
+        <span  class="post-meta-item-text" style='color:gray'>  字数统计: </span>
+        <span class="post-count" style='color:gray'>1,813字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp;  &nbsp;
+      <span class="post-meta-item-icon">
+        <image src='/blog/public/images/time.png'/>
+        <span class="post-meta-item-text" style='color:gray'>  阅读时长: </span>
+        <span class="post-count" style='color:gray'>7分</span>
+      </span>
+    </span>
+</div>
+	
+        <a href="/blog/public/2020/11/19/screen_compatible/" class="article-date">
+  <time datetime="2020-11-19T00:11:29.000Z" itemprop="datePublished">2020-11-19</time>
+</a>
+	
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody" style='margin-top:0'>
+      
+
+
+      
+
+      
+        <h3 id="关于屏幕适配"><a href="#关于屏幕适配" class="headerlink" title="关于屏幕适配"></a>关于屏幕适配</h3><h4 id="基础知识部分"><a href="#基础知识部分" class="headerlink" title="基础知识部分"></a>基础知识部分</h4><ul>
+<li><p>对于了解屏幕适配我们需要先了解如下知识</p>
+<ul>
+<li>px pixel</li>
+<li>resolution</li>
+<li>ppi(pixels per inch)</li>
+<li>dpi(dots per inch)</li>
+<li>dp dip</li>
+<li>sp</li>
+</ul>
+</li>
+<li><p>px</p>
+<ul>
+<li>pixel，像素，组成屏幕图像的最小独立元素</li>
+<li>构成屏幕的发光的点，是物理的</li>
+<li>脱离了屏幕尺寸之后是没有大小可言的<ul>
+<li>可以将 1920 * 1080 颗像素放到一台 40 寸的小米电视机里面，也可以将同样多的像素全部塞到一台 5.5 寸的 iPhone7 Plus 手机里面去，那么对于 40 寸的电视而言，每个像素颗粒当然会大于 5.5 寸的手机的像素。<img src="/blog/public/2020/11/19/screen_compatible/px.png">
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>resolution</p>
+<ul>
+<li>分辨率，标识屏幕或图片所包含的像素个数，即像素尺寸</li>
+<li>如Pixel2xl的分辨率2880*1440，宽高比为18:9<ul>
+<li>18:9的说法，是与之前手机屏幕的16:9，17:9进行对比，更容易直观的比较。</li>
+</ul>
+</li>
+<li>可以简单理解为2880是高度上的所有像素点，1440为宽度上的所有点，那么Pixel2xl则共包含了2880 x 1440 = 4147200个像素点</li>
+<li>物理分辨率为硬件所支持的，逻辑(支持)分辨率为软件可达到的<ul>
+<li>例如在iphone3gs的时候，逻辑分辨率是320x480，物理分辨率也是320x480，iphone4出了之后，逻辑分辨率和3gs一样是320x480，显示的内容是一样多的，但是物理分辨率变成了640x960，原来在3gs的一个像素内容，在iphone4上则填充了4个像素，因此虽然内容显示还是一样多，但是iphone4s的屏幕精细度比3gs高了2倍，像素倍率是2.</li>
+<li>iphone6的逻辑分辨率是375x667，比iphone4/4s/5/5s/SE逻辑分辨率都要大，所以显示的内容更多。物理分辨率是750x1334，所以和上边谈到的机型一样，仍然是2倍的像素倍率<img src="/blog/public/2020/11/19/screen_compatible/resolution.png">        
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>ppi与dpi</p>
+<ul>
+<li>均为描述关于成像密度的描述单位</li>
+<li>dpi起源于纸媒时代印刷机印刷时在单位长度内的墨点密度，最早用于描述打印机性能<ul>
+<li>最多能用多少个墨点来打印一寸的内容</li>
+</ul>
+</li>
+<li>ppi描述显示器单位长度内的最小成象的密度，用于描述屏幕的像素密度<ul>
+<li>上面提到的印刷物以无数多的墨点来构成图像，而屏幕同样也是以一定数量的发光点来构成图像</li>
+<li>对于屏幕来说 PPI 是用于描述每英寸发光点数量的</li>
+<li>一块屏幕宽高有几寸是在生产的时候就被定好的，而宽高各能容纳下多少颗像素，也是在生产的时候就被定好的,所以我们所说的 PPI 可以说是一个物理单位。</li>
+</ul>
+</li>
+<li>当dot为pixel时两者值相同</li>
+<li>手机ppi为屏幕对角线上的每英寸像素点个数，勾股定理得出对角线上的像素点个数，再除以手机屏幕尺寸即可得出，以iPhone6为例，ppi = (开方)(750 * 750 + 1334 * 1334) / 4.7 = 325.6<img src="/blog/public/2020/11/19/screen_compatible/iphone_ppi.png"></li>
+<li>同理得出Pixel2xl的ppi = (开方)(2880 * 2880 + 1440 * 1440) / 6.0 = 536.65</li>
+</ul>
+</li>
+<li><p>dp与dip</p>
+<ul>
+<li>density-independent pixels无关密度像素，同一个概念</li>
+<li>是一个虚拟像素单位，其具体值与手机ppi有关<img src="/blog/public/2020/11/19/screen_compatible/dp.png">
+</li>
+</ul>
+</li>
+<li><p>sp</p>
+<ul>
+<li>Scale-independent Pixels无关缩放像素</li>
+<li>用于设置文字字体大小，默认与dp相同，不过会根据用户的首选文本大小来调整大小</li>
+</ul>
+</li>
+<li><p>dp与px的转换</p>
+<img src="/blog/public/2020/11/19/screen_compatible/dp_to_px.png">
+<ul>
+<li><p>以pixel2xl为例，通过代码获取screen density值为2.975</p>
+<img src="/blog/public/2020/11/19/screen_compatible/get_screen_density.png">
+</li>
+<li><p>扩大100倍后比较</p>
+<img src="/blog/public/2020/11/19/screen_compatible/how_to_cal.png">
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Google的适配方案"><a href="#Google的适配方案" class="headerlink" title="Google的适配方案"></a>Google的适配方案</h4><h5 id="支持不同的屏幕尺寸Material-Design"><a href="#支持不同的屏幕尺寸Material-Design" class="headerlink" title="支持不同的屏幕尺寸Material Design"></a>支持不同的屏幕尺寸<a href="https://material.io/design/layout/responsive-layout-grid.html" target="_blank" rel="noopener">Material Design</a></h5><ul>
+<li><p>使用ConstraintLayout</p>
+<ul>
+<li>约束布局</li>
+<li><a href="https://developer.android.com/training/constraint-layout" target="_blank" rel="noopener">使用ConstraintLayout构建自适应界面</a></li>
+</ul>
+</li>
+<li><p>避免使用硬编码的布局尺寸</p>
+<ul>
+<li>这里的硬编码即写死的px值</li>
+</ul>
+</li>
+<li><p>创建备用布局</p>
+<ul>
+<li>这里所谓的备用布局是指针对于不同dpi设备如平板、电视、手表，以及横竖屏</li>
+<li>可以通过创建layout-land创建用于横屏展示的界面布局</li>
+</ul>
+</li>
+<li><p>使用最小宽度限定符</p>
+<ul>
+<li>通过将屏幕描述为无关像素的度量值(dp)<img src="/blog/public/2020/11/19/screen_compatible/sw_compatible.png">
+</li>
+</ul>
+</li>
+<li><p>使用可用宽度或高度限定符</p>
+<ul>
+<li>通过创建layout-w600dp创建一个适配于宽度为600dp的屏幕界面</li>
+<li>通过创建layout-h600dp创建一个适配于高度为600dp的屏幕界面</li>
+</ul>
+</li>
+<li><p>使用Fragment将界面组件模块化</p>
+<ul>
+<li>定义不同的界面应用不同的设备，如平板、电视、手机等</li>
+</ul>
+</li>
+<li><p>创建可拉伸的九宫格位图</p>
+<ul>
+<li>使用.9.png图</li>
+</ul>
+</li>
+</ul>
+<h5 id="支持不同的像素密度"><a href="#支持不同的像素密度" class="headerlink" title="支持不同的像素密度"></a>支持不同的像素密度</h5><ul>
+<li>主要通过使用dp及sp完成，通过如下代码可以获取设备屏幕信息<img src="/blog/public/2020/11/19/screen_compatible/pixel2xl_screen_info.png">
+<ul>
+<li>这里的高度显示为2824而并非2880是由于顶部还有56像素的状态栏高度</li>
+</ul>
+</li>
+<li>提供备用图片
+<ul>
+<li>六种主要密度之间的缩放比为3:4:6:8:12:16</li>
+<li>如以分辨率1920 x 1080，尺寸5英寸为设计稿，此时ppi ≈ 440，将以xxhdpi为基准</li>
+<li>那么此时若提供的图片为96 * 96，则对应的其他文件夹中应当分别提供</li>
+<li>24 * 24 ldpi</li>
+<li>32 * 32 mdpi</li>
+<li>48 * 48 hdpi</li>
+<li>64 * 64 xhdpi</li>
+<li>96 * 96 xxhdpi(当前图片位置)</li>
+<li>128 * 128 xxxhpi</li>
+</ul>
+</li>
+<li>应用图标应该放在mipmap目录中<img src="/blog/public/2020/11/19/screen_compatible/app_icon.png">
+
+
+</li>
+</ul>
+<ul>
+<li><p>使用矢量图形</p>
+
+<ul>
+<li>目前自己创建的APP的默认图标就是矢量图<img src="/blog/public/2020/11/19/screen_compatible/default_app_icon.png">
+</li>
+</ul>
+</li>
+<li><p>Google的一些建议</p>
+<img src="/blog/public/2020/11/19/screen_compatible/drawable_pre_scale.png">
+
+</li>
+</ul>
+<h4 id="AutoLayout适配方案思路"><a href="#AutoLayout适配方案思路" class="headerlink" title="AutoLayout适配方案思路"></a>AutoLayout适配方案思路</h4><ul>
+<li><p><a href="https://github.com/hongyangAndroid/AndroidAutoLayout" target="_blank" rel="noopener">AutoLayout地址</a></p>
+</li>
+<li><p>在AutoLayoutConfig.getInstance().init(context)中有如下方法</p>
+<img src="/blog/public/2020/11/19/screen_compatible/autolayout_fail_reason.png">
+<ul>
+<li>获取了设计稿的分辨率以及手机的分辨率</li>
+</ul>
+</li>
+<li><p>在该适配方案中所有的Activity都继承自AutoLayoutActivity</p>
+<img src="/blog/public/2020/11/19/screen_compatible/autolayout_step_2.png"></li>
+<li><p>以AutoLinearLayout为例</p>
+
+<ul>
+<li>AutoLinearLayout继承自LinearLayout</li>
+<li>重写onMeasure()方法通过AutoLayoutInfo中持有的AutoAttr对子View的属性进行适配</li>
+</ul>
+</li>
+<li><p>继续进行apply(View)方法</p>
+<img src="/blog/public/2020/11/19/screen_compatible/autolayout_step_4.png">
+<ul>
+<li>AutoAttr为抽象类</li>
+<li>在apply方法中对View的属性值进行适配计算</li>
+<li>计算过方式即通过AutoUtils工具类的getPercentWidthSizeBigger(pxValue)等方法进行计算</li>
+<li>计算规则即是按照实际稿与实际值的比例进行设置</li>
+<li>最后通过exec(vew,val)对适配后的值进行设置</li>
+</ul>
+</li>
+<li><p>AutoAttr为抽象类，以Height为例，即HeightAttr</p>
+<img src="/blog/public/2020/11/19/screen_compatible/autolayout_step_5.png">
+<ul>
+<li>HeightAttr继承自AutoAttr</li>
+<li>在exec(View,int)方法中对ViewGroup.LayoutParams.height进行了设置，从而完成高度的适配</li>
+</ul>
+</li>
+<li><p>一个问题</p>
+<ul>
+<li>支持16:9的屏幕，目前已经不维护了，对于全面屏手机不再适用</li>
+<li>如计稿为1920 * 1080，而Pixel2xl屏幕分辨率为2880 * 1440</li>
+<li>此时设计稿的高宽比例为16:9;而实际屏幕高宽比为18:9</li>
+<li>由于该适配思路是按照百分比缩放进行</li>
+<li>所以在实际机型与设计稿比例相差较多情况下，继续按照百分比缩放的话将会界面适配时失败</li>
+<li>如上例中将会导致高度变高，若在设计稿中为正方形，在Pixel2xl上将呈现一个长方形<img src="/blog/public/2020/11/19/screen_compatible/autolayout_wrong_sample.png"></li>
+<li>粗糙的修改方案为调整init逻辑，添加当前宽高比与设计稿宽高比的对比，以宽为基准，对高进行重新设置<img src="/blog/public/2020/11/19/screen_compatible/fixed.png">
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="新的适配方案-以sw最小宽度限定符为例"><a href="#新的适配方案-以sw最小宽度限定符为例" class="headerlink" title="新的适配方案(以sw最小宽度限定符为例)"></a>新的适配方案(以sw最小宽度限定符为例)</h4><h4 id="适配方案的迁移"><a href="#适配方案的迁移" class="headerlink" title="适配方案的迁移"></a>适配方案的迁移</h4><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://developer.android.com/guide/practices/screens_support" target="_blank" rel="noopener">google文档</a><br><a href="https://www.jianshu.com/p/2aded8bb6ede" target="_blank" rel="noopener">SW适配方式</a><br><a href="https://99designs.com.sg/blog/tips/ppi-vs-dpi-whats-the-difference/" target="_blank" rel="noopener">PPI vs DPI</a><br><a href="https://blog.csdn.net/lmj623565791/article/details/49990941" target="_blank" rel="noopener">AutoLayout</a><br><a href="https://blog.csdn.net/strawberry2013/article/details/51123528" target="_blank" rel="noopener">AutoLayout源码简析</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://youmehe.wang:443/blog/2020/11/19/screen_compatible/" data-id="ckhnlyo01000s6tndbb86flls"
+         class="article-share-link">分享</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/blog/public/2020/04/15/letcode242/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">leetcode242有效的字母异位词</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+  <script>
+  for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+  }
+  </script>
+</article>
+
+
+
+</section>
+  <footer class="footer" style='text-align:center;'>
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 天凉好个秋</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/24/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "当前时间线 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/blog/public/"><img src="/blog/public/images/myhomeR.svg" alt="天凉好个秋"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/gallery">生活</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/blog/public/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/blog/public/js/jquery-2.0.3.min.js"></script>
+<script src="/blog/public/js/jquery.justifiedGallery.min.js"></script>
+<script src="/blog/public/js/lazyload.min.js"></script>
+<script src="/blog/public/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/blog/public/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/blog/public/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+
+  <script src="/blog/public/js/search.js"></script>
+  <script>searchFunc('/blog/public/search.xml','local-search-input','local-search-result')</script>
+  <script>for(var i = 0;i < document.getElementsByClassName("article-footer").length;i++){document.getElementsByClassName("article-footer")[i].style.display="none";}</script>
+
+
+<script>
+for(var i = 0;i < document.getElementsByClassName("article-date").length;i++){
+    document.getElementsByClassName("article-date")[i].style.float="right";
+    document.getElementsByClassName("article-date")[i].style.marginTop="2vh";
+}
+</script>
+<script src="/blog/public/js/ocean.js"></script>
+
+</body>
+</html>
